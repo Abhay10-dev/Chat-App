@@ -25,14 +25,14 @@ FROM eclipse-temurin:21-jre-alpine
 
 WORKDIR /app
 
-# Create a non-root system user for security
+# Create system group and non-root user
 RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 
 # Copy only the compiled JAR from the builder stage
 COPY --from=builder /app/target/chat-app-backend-0.0.1-SNAPSHOT.jar app.jar
 
-# Set ownership to non-root user
-RUN chown appuser:appuser app.jar
+# Fix: Match user and group name (appuser:appgroup)
+RUN chown appuser:appgroup app.jar
 
 USER appuser
 
