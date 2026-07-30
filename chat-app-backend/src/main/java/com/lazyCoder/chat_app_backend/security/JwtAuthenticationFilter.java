@@ -56,4 +56,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         }
         return null;
     }
+
+    @Override
+    protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
+        return "OPTIONS".equalsIgnoreCase(request.getMethod());
+    }
 }
