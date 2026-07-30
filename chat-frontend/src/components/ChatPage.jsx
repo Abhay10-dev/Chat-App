@@ -250,7 +250,7 @@ export default function ChatRoom() {
   const showEmpty = !isLoadingHistory && messages.length === 0;
 
   return (
-    <div className="flex flex-col h-screen bg-slate-950 text-white overflow-hidden">
+    <div className="flex flex-col h-[100dvh] bg-slate-950 text-white overflow-hidden">
       {/* ── Header ── */}
       <header className="flex-none px-4 sm:px-6 py-3 bg-slate-900/90 backdrop-blur-sm border-b border-slate-800 flex items-center justify-between gap-3">
         {/* Left: room name + status */}

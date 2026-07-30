@@ -138,7 +138,7 @@ export default function LandingPage() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-950 flex items-center justify-center p-4">
+    <div className="min-h-[100dvh] bg-slate-950 flex items-center justify-center p-4">
       {/* Background glow effect */}
       <div
         aria-hidden="true"
