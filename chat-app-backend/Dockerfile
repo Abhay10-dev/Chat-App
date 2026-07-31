@@ -31,13 +31,13 @@ RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 # Copy only the compiled JAR from the builder stage
 COPY --from=builder /app/target/chat-app-backend-0.0.1-SNAPSHOT.jar app.jar
 
-# Fix: Match user and group name (appuser:appgroup)
+# Fix ownership
 RUN chown appuser:appgroup app.jar
 
 USER appuser
 
-# Expose Spring Boot's default port
+# Expose Spring Boot's dynamic/default port
 EXPOSE 8081
 
-# Configure JVM runtime parameters for container environments
-ENTRYPOINT ["java", "-XX:+UseG1GC", "-XX:MaxRAMPercentage=75.0", "-jar", "app.jar"]
+# Force JVM to read SPRING_DATA_MONGODB_URI explicitly as a system property
+ENTRYPOINT ["sh", "-c", "java -XX:+UseG1GC -XX:MaxRAMPercentage=75.0 -Dspring.data.mongodb.uri=${SPRING_DATA_MONGODB_URI} -jar app.jar"]
